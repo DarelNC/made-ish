@@ -19,7 +19,7 @@ Copy `.env.example` to `.env.local` to set a stats token or change where events 
 
 ## Make it yours
 
-Everything on the page comes from [`content/site.js`](content/site.js): a profile and a list of links. Add a link, commit, deploy.
+Everything on the page comes from [`content/site.js`](content/site.js): a profile and a list of links. Add a link, commit, deploy. The page has five themes and a picker at the top. New visitors get a light or dark one to match their system, and the choice is remembered on their device.
 
 ## How the analytics work
 

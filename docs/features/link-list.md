@@ -4,7 +4,7 @@ The public page at `/`. Status: v1.
 
 ## What it does
 
-Shows the owner's name, bio and a link count next to a list of black slabs, one per entry in `content/site.js`. It is a static page: no request-time work, served from the CDN. Layout is one column on phones and two on desktop, see [../design.md](../design.md).
+Shows the owner's name, bio and a link count next to a list of links, one per entry in `content/site.js`. It is a static page: no request-time work, served from the CDN. Layout is one column on phones and two on desktop, and it can be switched between five themes, see [../design.md](../design.md) and [theme-picker.md](theme-picker.md).
 
 ## Data
 
