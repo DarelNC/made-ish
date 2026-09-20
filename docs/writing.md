@@ -43,4 +43,9 @@ Say the specific true thing, plainly, in the voice of a person. Short sentences.
 
 ## This project's voice
 
-Plain and a little dry. UI labels are uppercase mono and short. Numbers on the page are real, and a fake statistic is never a joke.
+Sarcastic, and at the owner's own expense. The page makes fun of the projects and of the person who made them, never of the visitor. Two limits:
+
+- **The joke can't make a factual claim that is false.** A blurb still has to say what the thing is. Coined does find variable names, Caffeinated does keep the screen on. The sarcasm goes around the fact and doesn't replace it.
+- **Numbers are real.** A fake statistic is not a joke.
+
+UI labels are uppercase mono and short. Status words: `working`, `half done`, `dead`. Theme names in the picker are jokes, and the accessible names stay plain color names.

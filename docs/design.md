@@ -22,7 +22,7 @@ The first build copied poster #4 whole (rail, caption bar, clock, number headlin
 | --- | --- | --- | --- | --- |
 | `cream` | 1 | `#f5efe6` paper | ruled rows, orange snap on hover | serif italic "links", one orange bar |
 | `maroon` | 2 | dark red gradient over a faint grid | dashed rows, lime snap | scrolling ticker of your links, dashed orbit circle, tape-label tag |
-| `newsprint` | 3 | `#e9e1d0` with a dot screen | heavy ruled rows, lime highlight with hard shadow | masthead rules, lime highlighted word, "unfiled" stamp |
+| `newsprint` | 3 | `#e9e1d0` with a dot screen | heavy ruled rows, lime highlight with hard shadow | masthead rules, lime highlighted word, "untested" stamp |
 | `lime` | 4 | `#e6ff4f` with diagonal hatch | black slabs, orange snap and hard shadow | outlined second word |
 | `blueprint` | 5 | `#0e2238` with a drawn grid | bordered parts list, dashed dividers | outlined first word, dimension line, inset frame |
 

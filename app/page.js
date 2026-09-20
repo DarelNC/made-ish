@@ -4,9 +4,9 @@ import ThemePicker from "@/components/ThemePicker";
 import { links, profile } from "@/content/site";
 
 const STATUS = {
-  live: "live",
-  wip: "in progress",
-  retired: "retired",
+  live: "working",
+  wip: "half done",
+  retired: "dead",
 };
 
 const two = (n) => String(n).padStart(2, "0");
@@ -40,7 +40,7 @@ export default function Home() {
 
         <header className="lg:sticky lg:top-10 lg:self-start">
           <p className="dim label" aria-hidden="true">
-            Scale 1 : 1
+            Not to scale
           </p>
           <p className="label">{profile.handle}</p>
 
@@ -56,10 +56,10 @@ export default function Home() {
           <p className="bio">{profile.bio}</p>
 
           <p className="tag">
-            {links.length} {links.length === 1 ? "link" : "links"}
+            {links.length} {links.length === 1 ? "link" : "links"}, go on
           </p>
           <span className="stamp label" aria-hidden="true">
-            Unfiled
+            Untested
           </span>
           <div className="bar" aria-hidden="true" />
           <p className="label muted mt-3">{summary}</p>

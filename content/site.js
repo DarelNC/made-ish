@@ -4,7 +4,7 @@
 export const profile = {
   name: "DarelNC",
   handle: "github.com/DarelNC",
-  bio: "Small web things and apps I build. Everything lives at one of these links.",
+  bio: "Small web things and apps I made instead of doing something sensible. Pick one.",
 };
 
 /** @type {{ id: string, title: string, url: string, blurb: string, kind: "web" | "app" | "repo" | "other", status: "live" | "wip" | "retired" }[]} */
@@ -13,7 +13,7 @@ export const links = [
     id: "coined",
     title: "Coined",
     url: "https://coined.vercel.app",
-    blurb: "Variable names, found in real public code.",
+    blurb: "Finds what strangers named their variables, so you can skip the thinking.",
     kind: "web",
     status: "live",
   },
@@ -21,7 +21,7 @@ export const links = [
     id: "congrats-probably",
     title: "Congratulations, Probably",
     url: "https://congrats-probably.vercel.app",
-    blurb: "A game about luck. You roll a die, that is all.",
+    blurb: "You roll a die. There are no choices, so nothing you do matters.",
     kind: "web",
     status: "live",
   },
@@ -29,7 +29,7 @@ export const links = [
     id: "caffeinated",
     title: "Caffeinated",
     url: "https://github.com/DarelNC/caffeinated",
-    blurb: "Keeps an Android screen awake for as long as you say.",
+    blurb: "Keeps an Android screen on. Yes, that is the whole app.",
     kind: "app",
     status: "live",
   },
@@ -37,7 +37,7 @@ export const links = [
     id: "github",
     title: "Everything else",
     url: "https://github.com/DarelNC",
-    blurb: "The rest of the open tabs, on GitHub.",
+    blurb: "The rest of what I started. Finishing is a separate topic.",
     kind: "repo",
     status: "live",
   },

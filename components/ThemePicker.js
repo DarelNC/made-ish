@@ -25,12 +25,12 @@ function choose(id) {
 
 export default function ThemePicker() {
   const current = useSyncExternalStore(subscribe, read, readOnServer);
-  const label = THEMES.find((t) => t.id === current)?.label;
+  const mood = THEMES.find((t) => t.id === current)?.mood;
 
   return (
     <div className="picker">
       <p className="label">
-        Theme<span className="hidden sm:inline"> / {label}</span>
+        Redecorate<span className="hidden sm:inline"> / {mood}</span>
       </p>
       <div role="radiogroup" aria-label="Theme" className="picker-swatches">
         {THEMES.map((t) => (
@@ -40,7 +40,7 @@ export default function ThemePicker() {
             role="radio"
             aria-checked={t.id === current}
             aria-label={t.label}
-            title={t.label}
+            title={t.mood}
             onClick={() => choose(t.id)}
             className="swatch"
             style={{ "--sw-a": t.swatch[0], "--sw-b": t.swatch[1] }}
