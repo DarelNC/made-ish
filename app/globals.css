@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* Palette and type. Values and reasons: docs/design.md */
+@theme {
+  --color-lime: #e6ff4f;
+  --color-ink: #14100e;
+  --color-orange: #ff5a1f;
+  --color-bone: #f5efe6;
+
+  --font-display: var(--font-archivo-black), "Arial Black", sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  background: var(--color-ink);
+  color: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: var(--color-orange);
+  color: var(--color-ink);
+}
+
+/* Diagonal hatch on the lime ground */
+.hatch {
+  background-color: var(--color-lime);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 7px,
+    rgb(20 16 14 / 0.08) 7px 8px
+  );
+}
+
+/* Uppercase spec-sheet label */
+.label {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+/* Headline words size themselves to the width of the column.
+   --n is the number of letters in the word. */
+.headline {
+  container-type: inline-size;
+}
+.headline-word {
+  display: block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  font-size: min(34cqw, calc(100cqw / (var(--n) * 0.8)));
+}
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+/* One link: a black slab that snaps to orange */
+.slab {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0 1rem;
+  min-height: 4.5rem;
+  padding: 0.9rem 1rem;
+  background: var(--color-ink);
+  color: var(--color-lime);
+  box-shadow: 0 0 0 0 var(--color-ink);
+  transition:
+    transform 120ms steps(2, end),
+    box-shadow 120ms steps(2, end),
+    background-color 120ms steps(2, end),
+    color 120ms steps(2, end);
+  -webkit-tap-highlight-color: transparent;
+}
+/* The title shrinks until its longest word fits the slab. --n is that word's length. */
+.slab-body {
+  container-type: inline-size;
+  min-width: 0;
+}
+.slab-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  font-size: clamp(1rem, calc(100cqw / (var(--n) * 0.82)), 2.25rem);
+}
+@media (min-width: 64rem) {
+  .slab {
+    min-height: 5.5rem;
+    padding: 1.4rem 1.75rem;
+  }
+}
+.slab:active,
+.slab:focus-visible {
+  background: var(--color-orange);
+  color: var(--color-ink);
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+  outline: none;
+}
+@media (hover: hover) {
+  .slab:hover {
+    background: var(--color-orange);
+    color: var(--color-ink);
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 0 var(--color-ink);
+  }
+}
+.slab:target {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slab,
+  .slab:active,
+  .slab:focus-visible,
+  .slab:hover {
+    transform: none;
+    transition: none;
+  }
+}
