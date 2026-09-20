@@ -1,0 +1,306 @@
+/* Five themes on one markup. Each block sets the variables that globals.css
+   reads, then adds the few overrides that a variable cannot express.
+   Which poster each came from and why: docs/design.md.
+
+   Variables
+   --bg --bg-image --bg-size   page ground
+   --fg --muted --accent --hi  text, secondary text, orange, second accent
+   --hw1 --hw2                 headline word colors
+   --slab-bg --slab-fg         a link at rest
+   --snap-bg --snap-fg         a link on hover, focus and press
+   --lift --shadow-off --shadow-color   hover movement and hard shadow
+   --gap                       space between links
+   --tag-bg --tag-fg           the count tag
+   --chip-live-bg --chip-live-fg --chip-ret   status chips */
+
+/* ---------- cream (poster 1): ruled rows, one orange bar ---------- */
+
+:root,
+[data-theme="cream"] {
+  --bg: #f5efe6;
+  --bg-image: none;
+  --fg: #14100e;
+  --muted: rgb(20 16 14 / 0.62);
+  --accent: #ff5a1f;
+  --hi: #ff5a1f;
+  --hw1: #14100e;
+  --hw2: #ff5a1f;
+  --slab-bg: transparent;
+  --slab-fg: #14100e;
+  --snap-bg: #ff5a1f;
+  --snap-fg: #14100e;
+  --lift: 0px;
+  --shadow-off: 0px;
+  --shadow-color: transparent;
+  --gap: 0;
+  --tag-bg: transparent;
+  --tag-fg: #ff5a1f;
+  --chip-live-bg: #14100e;
+  --chip-live-fg: #f5efe6;
+  --chip-ret: rgb(20 16 14 / 0.55);
+}
+[data-theme="cream"] .hw-2 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+[data-theme="cream"] .tag {
+  display: none;
+}
+[data-theme="cream"] .bar {
+  display: block;
+  height: 1.4rem;
+  margin-top: 2rem;
+  background: var(--accent);
+}
+[data-theme="cream"] .slab {
+  border-top: 2px solid var(--fg);
+}
+[data-theme="cream"] .list > li:last-child .slab {
+  border-bottom: 2px solid var(--fg);
+}
+
+/* ---------- maroon (poster 2): dark red, ticker, tape label ---------- */
+
+[data-theme="maroon"] {
+  --bg: #1a0a0d;
+  --bg-image:
+    linear-gradient(rgb(245 239 230 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(245 239 230 / 0.035) 1px, transparent 1px),
+    radial-gradient(120% 70% at 0% 0%, #6a2015 0%, rgb(26 10 13 / 0) 65%),
+    linear-gradient(180deg, #3a0f10, #1a0a0d 75%);
+  --bg-size: 24px 24px, 24px 24px, auto, auto;
+  --fg: #f5efe6;
+  --muted: rgb(245 239 230 / 0.62);
+  --accent: #ff5a1f;
+  --hi: #e6ff4f;
+  --hw1: #f5efe6;
+  --hw2: #ff5a1f;
+  --slab-bg: transparent;
+  --slab-fg: #f5efe6;
+  --snap-bg: #e6ff4f;
+  --snap-fg: #14100e;
+  --lift: 0px;
+  --shadow-off: 0px;
+  --shadow-color: transparent;
+  --gap: 0;
+  --tag-bg: #e6ff4f;
+  --tag-fg: #14100e;
+  --chip-live-bg: #e6ff4f;
+  --chip-live-fg: #14100e;
+  --chip-ret: rgb(245 239 230 / 0.55);
+}
+[data-theme="maroon"] .hw-1 {
+  text-shadow: 0.05em 0.05em 0 #a3321a;
+}
+[data-theme="maroon"] .tag {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.6rem 1rem;
+  transform: rotate(-3deg);
+}
+[data-theme="maroon"] .slab {
+  border-bottom: 1px dashed rgb(245 239 230 / 0.35);
+}
+[data-theme="maroon"] .list > li:first-child .slab {
+  border-top: 2px solid #f5efe6;
+}
+[data-theme="maroon"] .marquee {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #e6ff4f;
+  color: #14100e;
+  padding: 0.7rem 0;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 45s linear infinite;
+}
+.marquee-track span {
+  padding-right: 2rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 1rem;
+}
+[data-theme="maroon"] .orbit {
+  display: block;
+  position: absolute;
+  right: -260px;
+  top: 90px;
+  width: 620px;
+  height: 620px;
+  border: 1px dashed rgb(230 255 79 / 0.32);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ---------- newsprint (poster 3): dotted paper, masthead, stamp ---------- */
+
+[data-theme="newsprint"] {
+  --bg: #e9e1d0;
+  --bg-image: radial-gradient(circle, rgb(20 16 14 / 0.15) 0.9px, transparent 1.1px);
+  --bg-size: 5px 5px;
+  --fg: #14100e;
+  --muted: rgb(20 16 14 / 0.62);
+  --accent: #ff5a1f;
+  --hi: #e6ff4f;
+  --hw1: #14100e;
+  --hw2: #14100e;
+  --slab-bg: transparent;
+  --slab-fg: #14100e;
+  --snap-bg: #e6ff4f;
+  --snap-fg: #14100e;
+  --lift: -3px;
+  --shadow-off: 5px;
+  --shadow-color: #14100e;
+  --gap: 0;
+  --tag-bg: transparent;
+  --tag-fg: #ff5a1f;
+  --chip-live-bg: #14100e;
+  --chip-live-fg: #e9e1d0;
+  --chip-ret: rgb(20 16 14 / 0.55);
+}
+[data-theme="newsprint"] .topbar {
+  border-top: 5px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+  padding: 0.5rem 0;
+}
+[data-theme="newsprint"] .hw-2 {
+  width: fit-content;
+  margin-top: 0.12em;
+  padding: 0.04em 0.14em 0;
+  background: #e6ff4f;
+  box-shadow: 0.07em 0.07em 0 #14100e;
+}
+[data-theme="newsprint"] .tag {
+  padding-left: 0;
+  padding-right: 0;
+}
+[data-theme="newsprint"] .stamp {
+  display: inline-block;
+  margin: 0 0 0 1.25rem;
+  padding: 0.2rem 0.6rem;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  transform: rotate(-4deg);
+  vertical-align: 0.6rem;
+}
+[data-theme="newsprint"] .slab {
+  border-top: 3px solid var(--fg);
+}
+[data-theme="newsprint"] .list > li:last-child .slab {
+  border-bottom: 3px solid var(--fg);
+}
+
+/* ---------- lime (poster 4): black slabs on hatch ---------- */
+
+[data-theme="lime"] {
+  --bg: #e6ff4f;
+  --bg-image: repeating-linear-gradient(135deg, transparent 0 7px, rgb(20 16 14 / 0.08) 7px 8px);
+  --fg: #14100e;
+  --muted: rgb(20 16 14 / 0.7);
+  --accent: #ff5a1f;
+  --hi: #e6ff4f;
+  --hw1: #14100e;
+  --hw2: transparent;
+  --slab-bg: #14100e;
+  --slab-fg: #e6ff4f;
+  --snap-bg: #ff5a1f;
+  --snap-fg: #14100e;
+  --lift: -3px;
+  --shadow-off: 6px;
+  --shadow-color: #14100e;
+  --gap: 1rem;
+  --tag-bg: #14100e;
+  --tag-fg: #ff5a1f;
+  --chip-live-bg: #e6ff4f;
+  --chip-live-fg: #14100e;
+  --chip-ret: rgb(230 255 79 / 0.65);
+}
+[data-theme="lime"] .hw-2 {
+  -webkit-text-stroke: 2.5px #14100e;
+  paint-order: stroke fill;
+}
+@media (min-width: 64rem) {
+  [data-theme="lime"] {
+    --gap: 1.25rem;
+  }
+}
+
+/* ---------- blueprint (poster 5): navy grid, parts list ---------- */
+
+[data-theme="blueprint"] {
+  --bg: #0e2238;
+  --bg-image:
+    linear-gradient(rgb(110 200 170 / 0.17) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(110 200 170 / 0.17) 1px, transparent 1px),
+    linear-gradient(rgb(110 200 170 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(110 200 170 / 0.07) 1px, transparent 1px);
+  --bg-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  --fg: #f5efe6;
+  --muted: rgb(245 239 230 / 0.62);
+  --accent: #ff5a1f;
+  --hi: #e6ff4f;
+  --hw1: transparent;
+  --hw2: #e6ff4f;
+  --slab-bg: transparent;
+  --slab-fg: #f5efe6;
+  --snap-bg: rgb(110 200 170 / 0.16);
+  --snap-fg: #e6ff4f;
+  --lift: 0px;
+  --shadow-off: 0px;
+  --shadow-color: transparent;
+  --gap: 0;
+  --tag-bg: transparent;
+  --tag-fg: #ff5a1f;
+  --chip-live-bg: #e6ff4f;
+  --chip-live-fg: #0e2238;
+  --chip-ret: rgb(110 200 170 / 0.8);
+}
+[data-theme="blueprint"] .page::before {
+  content: "";
+  position: fixed;
+  inset: 12px;
+  border: 1px solid rgb(110 200 170 / 0.45);
+  pointer-events: none;
+}
+[data-theme="blueprint"] .hw-1 {
+  -webkit-text-stroke: 2px #6ec8aa;
+  paint-order: stroke fill;
+}
+[data-theme="blueprint"] .tag {
+  border: 1px solid var(--accent);
+}
+[data-theme="blueprint"] .dim {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  color: rgb(110 200 170 / 0.9);
+}
+[data-theme="blueprint"] .dim::before,
+[data-theme="blueprint"] .dim::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgb(110 200 170 / 0.55);
+}
+[data-theme="blueprint"] .list {
+  border: 1px solid rgb(110 200 170 / 0.55);
+  background: rgb(14 34 56 / 0.72);
+}
+[data-theme="blueprint"] .slab {
+  border-bottom: 1px dashed rgb(110 200 170 / 0.4);
+}
+[data-theme="blueprint"] .list > li:last-child .slab {
+  border-bottom: 0;
+}

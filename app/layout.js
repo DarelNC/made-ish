@@ -1,6 +1,8 @@
 import { Archivo_Black, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { profile } from "@/content/site";
+import { DEFAULT_THEME, themeInitScript } from "@/lib/themes";
 import "./globals.css";
+import "./themes.css";
 
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black",
@@ -26,13 +28,19 @@ export const metadata = {
   description: profile.bio,
 };
 
-export const viewport = {
-  themeColor: "#14100e",
-};
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${archivoBlack.variable} ${playfair.variable} ${jetbrains.variable}`}>
+    // The inline script picks the theme before first paint, so the attribute
+    // it sets legitimately differs from what the server rendered.
+    <html
+      lang="en"
+      data-theme={DEFAULT_THEME}
+      suppressHydrationWarning
+      className={`${archivoBlack.variable} ${playfair.variable} ${jetbrains.variable}`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
+      </head>
       <body>{children}</body>
     </html>
   );

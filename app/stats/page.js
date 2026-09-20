@@ -33,96 +33,108 @@ export default async function Stats({ searchParams }) {
   const maxDay = Math.max(1, ...s.daily.map((d) => Math.max(d.views, d.clicks)));
 
   return (
-    <main className="mx-auto min-h-dvh max-w-[760px] bg-ink px-5 py-8 text-lime">
-      <header className="flex items-start justify-between gap-4">
-        <div>
-          <p className="label text-lime/60">{profile.name} / private</p>
-          <h1 className="mt-2 font-display text-5xl uppercase leading-none text-bone">Stats</h1>
-        </div>
-        {!devOpen && (
-          <form action={logout}>
-            <button className="label border border-lime/40 px-3 py-2 hover:bg-lime hover:text-ink">Lock</button>
-          </form>
+    <div className="min-h-dvh bg-ink">
+      <main className="mx-auto max-w-[760px] px-5 py-8 text-lime">
+        <header className="flex items-start justify-between gap-4">
+          <div>
+            <p className="label text-lime/60">{profile.name} / private</p>
+            <h1 className="mt-2 font-display text-5xl uppercase leading-none text-bone">Stats</h1>
+          </div>
+          {!devOpen && (
+            <form action={logout}>
+              <button className="label border border-lime/40 px-3 py-2 hover:bg-lime hover:text-ink">Lock</button>
+            </form>
+          )}
+        </header>
+
+        <nav className="mt-6 flex gap-2" aria-label="Range">
+          {RANGES.map((r) => (
+            <a
+              key={r}
+              href={`/stats?days=${r}`}
+              aria-current={r === days ? "page" : undefined}
+              className={`label px-3 py-2 ${r === days ? "bg-lime text-ink" : "border border-lime/40 hover:border-lime"}`}
+            >
+              {r} days
+            </a>
+          ))}
+        </nav>
+
+        {storeName === "none" && (
+          <p className="mt-6 border-2 border-orange p-4 text-sm text-orange">
+            No store is configured, so nothing is being recorded and every number below is zero. See
+            docs/architecture.md, &ldquo;Open decision: production storage&rdquo;.
+          </p>
         )}
-      </header>
 
-      <nav className="mt-6 flex gap-2" aria-label="Range">
-        {RANGES.map((r) => (
-          <a
-            key={r}
-            href={`/stats?days=${r}`}
-            aria-current={r === days ? "page" : undefined}
-            className={`label px-3 py-2 ${r === days ? "bg-lime text-ink" : "border border-lime/40 hover:border-lime"}`}
+        <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Tile label="Views" value={s.views} />
+          <Tile label="Visitors" value={s.visitors} />
+          <Tile label="Clicks" value={s.clicks} accent />
+          <Tile label="Clicks per view" value={s.clicksPerView.toFixed(2)} />
+        </section>
+
+        <section className="mt-12">
+          <h2 className="label text-lime/60">Clicks per link</h2>
+          <ul className="mt-3 space-y-3">
+            {s.links.map((l) => (
+              <li key={l.id}>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <span
+                    className={`font-display text-lg uppercase ${l.removed ? "text-lime/50 line-through" : "text-bone"}`}
+                  >
+                    {titleOf(l.id)}
+                  </span>
+                  <span className="label whitespace-nowrap text-lime/70">
+                    {plural(l.clicks, "click", "clicks")} / {plural(l.clickers, "person", "people")} / {pct(l.share)}
+                  </span>
+                </div>
+                <div className="mt-1.5 h-3 bg-lime/10">
+                  <div className="h-full bg-orange" style={{ width: `${(l.clicks / maxClicks) * 100}%` }} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-12">
+          <h2 className="label text-lime/60">Per day (UTC)</h2>
+          <div
+            className="mt-3 flex h-40 items-end gap-px"
+            role="img"
+            aria-label={`Views and clicks per day, last ${days} days`}
           >
-            {r} days
-          </a>
-        ))}
-      </nav>
-
-      {storeName === "none" && (
-        <p className="mt-6 border-2 border-orange p-4 text-sm text-orange">
-          No store is configured, so nothing is being recorded and every number below is zero. See docs/architecture.md,
-          &ldquo;Open decision: production storage&rdquo;.
-        </p>
-      )}
-
-      <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Tile label="Views" value={s.views} />
-        <Tile label="Visitors" value={s.visitors} />
-        <Tile label="Clicks" value={s.clicks} accent />
-        <Tile label="Clicks per view" value={s.clicksPerView.toFixed(2)} />
-      </section>
-
-      <section className="mt-12">
-        <h2 className="label text-lime/60">Clicks per link</h2>
-        <ul className="mt-3 space-y-3">
-          {s.links.map((l) => (
-            <li key={l.id}>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <span className={`font-display text-lg uppercase ${l.removed ? "text-lime/50 line-through" : "text-bone"}`}>
-                  {titleOf(l.id)}
-                </span>
-                <span className="label whitespace-nowrap text-lime/70">
-                  {plural(l.clicks, "click", "clicks")} / {plural(l.clickers, "person", "people")} / {pct(l.share)}
-                </span>
+            {s.daily.map((d) => (
+              <div
+                key={d.day}
+                className="flex h-full min-w-0 flex-1 items-end gap-px"
+                title={`${d.day}: ${d.views} views, ${d.clicks} clicks`}
+              >
+                <div className="w-1/2 bg-lime/40" style={{ height: `${(d.views / maxDay) * 100}%` }} />
+                <div className="w-1/2 bg-orange" style={{ height: `${(d.clicks / maxDay) * 100}%` }} />
               </div>
-              <div className="mt-1.5 h-3 bg-lime/10">
-                <div className="h-full bg-orange" style={{ width: `${(l.clicks / maxClicks) * 100}%` }} />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
+            ))}
+          </div>
+          <p className="label mt-2 flex justify-between text-lime/50">
+            <span>{s.daily[0].day}</span>
+            <span>
+              <span className="text-lime/60">views</span> / <span className="text-orange">clicks</span>
+            </span>
+            <span>{s.daily.at(-1).day}</span>
+          </p>
+        </section>
 
-      <section className="mt-12">
-        <h2 className="label text-lime/60">Per day (UTC)</h2>
-        <div className="mt-3 flex h-40 items-end gap-px" role="img" aria-label={`Views and clicks per day, last ${days} days`}>
-          {s.daily.map((d) => (
-            <div key={d.day} className="flex h-full min-w-0 flex-1 items-end gap-px" title={`${d.day}: ${d.views} views, ${d.clicks} clicks`}>
-              <div className="w-1/2 bg-lime/40" style={{ height: `${(d.views / maxDay) * 100}%` }} />
-              <div className="w-1/2 bg-orange" style={{ height: `${(d.clicks / maxDay) * 100}%` }} />
-            </div>
-          ))}
-        </div>
-        <p className="label mt-2 flex justify-between text-lime/50">
-          <span>{s.daily[0].day}</span>
-          <span>
-            <span className="text-lime/60">views</span> / <span className="text-orange">clicks</span>
-          </span>
-          <span>{s.daily.at(-1).day}</span>
+        <section className="mt-12 grid gap-10 sm:grid-cols-3">
+          <Ranked title="Where from" rows={s.from} total={s.views} />
+          <Ranked title="Countries" rows={s.countries} total={s.views} />
+          <Ranked title="Devices" rows={s.devices} total={s.views} />
+        </section>
+
+        <p className="label mt-14 text-lime/40">
+          Store: {storeName}. Views come from a beacon, clicks from the redirect. Bots are dropped.
         </p>
-      </section>
-
-      <section className="mt-12 grid gap-10 sm:grid-cols-3">
-        <Ranked title="Where from" rows={s.from} total={s.views} />
-        <Ranked title="Countries" rows={s.countries} total={s.views} />
-        <Ranked title="Devices" rows={s.devices} total={s.views} />
-      </section>
-
-      <p className="label mt-14 text-lime/40">
-        Store: {storeName}. Views come from a beacon, clicks from the redirect. Bots are dropped.
-      </p>
-    </main>
+      </main>
+    </div>
   );
 }
 
@@ -159,25 +171,27 @@ function Ranked({ title, rows, total }) {
 
 function Gate({ failed }) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[420px] flex-col justify-center bg-ink px-5 text-lime">
-      <p className="label text-lime/60">{profile.name} / private</p>
-      <h1 className="mt-2 font-display text-5xl uppercase leading-none text-bone">Stats</h1>
-      <form action={login} className="mt-8 space-y-3">
-        <label className="label block text-lime/70" htmlFor="token">
-          Token
-        </label>
-        <input
-          id="token"
-          name="token"
-          type="password"
-          autoComplete="current-password"
-          required
-          autoFocus
-          className="w-full border-2 border-lime/40 bg-transparent px-3 py-3 text-bone outline-none focus:border-lime"
-        />
-        {failed && <p className="label text-orange">That was not it.</p>}
-        <button className="label w-full bg-lime px-3 py-3 text-ink hover:bg-orange">Open</button>
-      </form>
-    </main>
+    <div className="min-h-dvh bg-ink">
+      <main className="mx-auto flex min-h-dvh max-w-[420px] flex-col justify-center px-5 text-lime">
+        <p className="label text-lime/60">{profile.name} / private</p>
+        <h1 className="mt-2 font-display text-5xl uppercase leading-none text-bone">Stats</h1>
+        <form action={login} className="mt-8 space-y-3">
+          <label className="label block text-lime/70" htmlFor="token">
+            Token
+          </label>
+          <input
+            id="token"
+            name="token"
+            type="password"
+            autoComplete="current-password"
+            required
+            autoFocus
+            className="w-full border-2 border-lime/40 bg-transparent px-3 py-3 text-bone outline-none focus:border-lime"
+          />
+          {failed && <p className="label text-orange">That was not it.</p>}
+          <button className="label w-full bg-lime px-3 py-3 text-ink hover:bg-orange">Open</button>
+        </form>
+      </main>
+    </div>
   );
 }

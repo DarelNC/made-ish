@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-/* Palette and type. Values and reasons: docs/design.md */
+/* Fixed palette (used by /stats, which ignores themes) and font stacks.
+   The themed values live in themes.css. Reasons: docs/design.md */
 @theme {
   --color-lime: #e6ff4f;
   --color-ink: #14100e;
@@ -13,8 +14,7 @@
 }
 
 html {
-  background: var(--color-ink);
-  color: var(--color-ink);
+  background-color: var(--bg);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -25,18 +25,23 @@ body {
 }
 
 ::selection {
-  background: var(--color-orange);
-  color: var(--color-ink);
+  background: var(--accent);
+  color: #14100e;
 }
 
-/* Diagonal hatch on the lime ground */
-.hatch {
-  background-color: var(--color-lime);
-  background-image: repeating-linear-gradient(
-    135deg,
-    transparent 0 7px,
-    rgb(20 16 14 / 0.08) 7px 8px
-  );
+/* ---------- page ---------- */
+
+.page {
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: clip;
+  background-color: var(--bg);
+  background-image: var(--bg-image);
+  background-size: var(--bg-size, auto);
+  color: var(--fg);
+}
+.page > * {
+  position: relative;
 }
 
 /* Uppercase spec-sheet label */
@@ -48,13 +53,17 @@ body {
   font-size: 0.75rem;
   line-height: 1.5;
 }
+.muted {
+  color: var(--muted);
+}
 
-/* Headline words size themselves to the width of the column.
-   --n is the number of letters in the word. */
+/* ---------- headline ---------- */
+
+/* Words size themselves to the width of the column. --n is the letter count. */
 .headline {
   container-type: inline-size;
 }
-.headline-word {
+.hw {
   display: block;
   font-family: var(--font-display);
   text-transform: uppercase;
@@ -62,13 +71,81 @@ body {
   letter-spacing: -0.02em;
   font-size: min(34cqw, calc(100cqw / (var(--n) * 0.8)));
 }
-.outline {
-  color: transparent;
-  -webkit-text-stroke: 2.5px var(--color-ink);
-  paint-order: stroke fill;
+.hw-1 {
+  color: var(--hw1);
+}
+.hw-2 {
+  color: var(--hw2);
 }
 
-/* One link: a black slab that snaps to orange */
+.bio {
+  margin-top: 2rem;
+  max-width: 34ch;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.25rem 1rem 0.5rem;
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.875rem;
+  line-height: 1.2;
+}
+
+/* ---------- theme picker ---------- */
+
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+.picker-swatches {
+  display: flex;
+  gap: 0.25rem;
+}
+.swatch {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+.swatch::before {
+  content: "";
+  position: absolute;
+  inset: 0.3rem;
+  border: 2px solid var(--fg);
+  background: linear-gradient(135deg, var(--sw-a) 0 55%, var(--sw-b) 55% 100%);
+}
+.swatch[aria-checked="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--accent);
+}
+.swatch:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 1px;
+}
+
+/* ---------- links ---------- */
+
+.list {
+  display: grid;
+  gap: var(--gap);
+}
+
 .slab {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -76,9 +153,9 @@ body {
   gap: 0 1rem;
   min-height: 4.5rem;
   padding: 0.9rem 1rem;
-  background: var(--color-ink);
-  color: var(--color-lime);
-  box-shadow: 0 0 0 0 var(--color-ink);
+  background: var(--slab-bg);
+  color: var(--slab-fg);
+  box-shadow: 0 0 0 0 var(--shadow-color);
   transition:
     transform 120ms steps(2, end),
     box-shadow 120ms steps(2, end),
@@ -86,6 +163,29 @@ body {
     color 120ms steps(2, end);
   -webkit-tap-highlight-color: transparent;
 }
+.slab:active,
+.slab:focus-visible {
+  background: var(--snap-bg);
+  color: var(--snap-fg);
+  transform: translate(var(--lift), var(--lift));
+  box-shadow: var(--shadow-off) var(--shadow-off) 0 0 var(--shadow-color);
+  outline: none;
+}
+@media (hover: hover) {
+  .slab:hover {
+    background: var(--snap-bg);
+    color: var(--snap-fg);
+    transform: translate(var(--lift), var(--lift));
+    box-shadow: var(--shadow-off) var(--shadow-off) 0 0 var(--shadow-color);
+  }
+}
+@media (min-width: 64rem) {
+  .slab {
+    min-height: 5.5rem;
+    padding: 1.4rem 1.75rem;
+  }
+}
+
 /* The title shrinks until its longest word fits the slab. --n is that word's length. */
 .slab-body {
   container-type: inline-size;
@@ -98,31 +198,46 @@ body {
   line-height: 1;
   font-size: clamp(1rem, calc(100cqw / (var(--n) * 0.82)), 2.25rem);
 }
-@media (min-width: 64rem) {
-  .slab {
-    min-height: 5.5rem;
-    padding: 1.4rem 1.75rem;
+.slab-blurb {
+  opacity: 0.8;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  padding: 0.125rem 0.5rem;
+}
+.chip-live {
+  background: var(--chip-live-bg);
+  color: var(--chip-live-fg);
+}
+.chip-wip {
+  background: var(--accent);
+  color: #14100e;
+}
+.chip-retired {
+  border: 1px solid var(--chip-ret);
+  color: var(--chip-ret);
+}
+
+/* ---------- decoration (each theme turns on its own) ---------- */
+
+.marquee,
+.orbit,
+.bar,
+.stamp,
+.dim {
+  display: none;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
-}
-.slab:active,
-.slab:focus-visible {
-  background: var(--color-orange);
-  color: var(--color-ink);
-  transform: translate(-3px, -3px);
-  box-shadow: 6px 6px 0 0 var(--color-ink);
-  outline: none;
-}
-@media (hover: hover) {
-  .slab:hover {
-    background: var(--color-orange);
-    color: var(--color-ink);
-    transform: translate(-3px, -3px);
-    box-shadow: 6px 6px 0 0 var(--color-ink);
-  }
-}
-.slab:target {
-  outline: 3px solid var(--color-orange);
-  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -132,5 +247,8 @@ body {
   .slab:hover {
     transform: none;
     transition: none;
+  }
+  .marquee-track {
+    animation: none !important;
   }
 }
