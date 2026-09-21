@@ -41,7 +41,9 @@ export default function RootLayout({ children }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
       </head>
-      <body>{children}</body>
+      {/* Browser extensions (Dark Reader, Grammarly, ColorZilla) add attributes to <body> before React
+          loads. This body has none of its own, so silencing its attribute check hides nothing real. */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
