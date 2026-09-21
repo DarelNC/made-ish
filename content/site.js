@@ -6,7 +6,7 @@ export const profile = {
   brand: "made-ish",
   // Two short words or phrases. The first is solid, the second is the loud one.
   headline: ["Things", "I made"],
-  bio: "Small web things and apps I made instead of doing something sensible. Pick one.",
+  bio: "Small web things and apps nobody asked for, made with a confidence I did not earn. Pick one.",
 };
 
 /**
