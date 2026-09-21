@@ -304,3 +304,209 @@
 [data-theme="blueprint"] .list > li:last-child .slab {
   border-bottom: 0;
 }
+
+/* ---------- zine (built on newsprint paper): every link is its own tile ----------
+   The other themes show links as a uniform list. Here each link gets its own
+   color, pattern, shape, size, tilt and big glyph, chosen in lib/look.js and
+   passed in as data attributes. The header shrinks so the tiles are the page. */
+
+[data-theme="zine"] {
+  --bg: #ece5d6;
+  --bg-image: radial-gradient(circle, rgb(20 16 14 / 0.13) 0.9px, transparent 1.1px);
+  --bg-size: 5px 5px;
+  --fg: #14100e;
+  --muted: rgb(20 16 14 / 0.66);
+  --accent: #ff5a1f;
+  --hi: #e6ff4f;
+  --hw1: #14100e;
+  --hw2: #14100e;
+  --slab-bg: #e6ff4f;
+  --slab-fg: #14100e;
+  --snap-bg: #e6ff4f;
+  --snap-fg: #14100e;
+  --lift: -3px;
+  --shadow-off: 9px;
+  --shadow-color: #14100e;
+  --gap: 1.1rem;
+  --tag-bg: transparent;
+  --tag-fg: #ff5a1f;
+  --chip-live-bg: #14100e;
+  --chip-live-fg: #f5efe6;
+  --chip-ret: rgb(20 16 14 / 0.6);
+}
+
+/* header: small, so the links start on the first screen */
+[data-theme="zine"] .topbar {
+  grid-column: auto; /* the layout has one column, and a span of 2 would add a second */
+  border-top: 5px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+  padding: 0.5rem 0;
+}
+[data-theme="zine"] .shell {
+  grid-template-columns: 1fr;
+  row-gap: 1.75rem;
+}
+[data-theme="zine"] .head {
+  position: static;
+}
+[data-theme="zine"] .hw {
+  display: inline-block;
+  font-size: clamp(2.5rem, 11.5vw, 5rem);
+  line-height: 0.95;
+}
+[data-theme="zine"] .hw-2 {
+  padding: 0 0.12em;
+  background: #e6ff4f;
+  box-shadow: 0.06em 0.06em 0 #14100e;
+  transform: rotate(-2deg);
+}
+[data-theme="zine"] .bio {
+  margin-top: 1rem;
+  max-width: 52ch;
+  font-size: 0.9rem;
+}
+[data-theme="zine"] .tag,
+[data-theme="zine"] .stamp,
+[data-theme="zine"] .bar,
+[data-theme="zine"] .dim {
+  display: none;
+}
+
+/* tiles */
+[data-theme="zine"] .list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+[data-theme="zine"] .tile {
+  --tile-bg: #e6ff4f;
+  --tile-fg: #14100e;
+  --pc: 20 16 14;
+  --slab-bg: var(--tile-bg);
+  --slab-fg: var(--tile-fg);
+  --snap-bg: var(--tile-bg);
+  --snap-fg: var(--tile-fg);
+  display: flex;
+  flex: 1 1 9.5rem;
+  min-height: 9.5rem;
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 120ms steps(2, end);
+}
+@media (hover: hover) {
+  [data-theme="zine"] .tile:hover {
+    transform: rotate(0deg);
+  }
+}
+[data-theme="zine"] .tile:focus-within {
+  transform: rotate(0deg);
+}
+
+[data-theme="zine"] .tile[data-color="lime"] { --tile-bg: #e6ff4f; }
+[data-theme="zine"] .tile[data-color="orange"] { --tile-bg: #ff5a1f; }
+[data-theme="zine"] .tile[data-color="sky"] { --tile-bg: #8ecbff; }
+[data-theme="zine"] .tile[data-color="pink"] { --tile-bg: #ff9ad5; }
+[data-theme="zine"] .tile[data-color="mint"] { --tile-bg: #6ec8aa; }
+[data-theme="zine"] .tile[data-color="ink"] {
+  --tile-bg: #14100e;
+  --tile-fg: #e6ff4f;
+  --pc: 230 255 79;
+  --chip-live-bg: #e6ff4f;
+  --chip-live-fg: #14100e;
+  --chip-ret: rgb(230 255 79 / 0.7);
+}
+
+/* sizes: a long title always gets a wide tile (lib/look.js) */
+[data-theme="zine"] .tile[data-size="s"] { flex-basis: 9.5rem; min-height: 9.5rem; --title-max: 1.6rem; --glyph: 5rem; }
+[data-theme="zine"] .tile[data-size="m"] { flex-basis: 13rem; min-height: 12rem; --title-max: 2.1rem; --glyph: 7rem; }
+[data-theme="zine"] .tile[data-size="l"] { flex-basis: 100%; min-height: 14rem; --title-max: 2.75rem; --glyph: 9rem; }
+@media (min-width: 48rem) {
+  [data-theme="zine"] .tile[data-size="l"] { flex-basis: 26rem; min-height: 16rem; --title-max: 3.25rem; }
+}
+@media (min-width: 64rem) {
+  [data-theme="zine"] .tile[data-size="l"] { --title-max: 3.5rem; }
+}
+
+/* shapes */
+[data-theme="zine"] .tile[data-shape="rect"] .slab { border-radius: 0; }
+[data-theme="zine"] .tile[data-shape="round"] .slab { border-radius: 1.75rem; }
+[data-theme="zine"] .tile[data-shape="leaf"] .slab { border-radius: 2.75rem 0.3rem 2.75rem 0.3rem; }
+[data-theme="zine"] .tile[data-shape="tab"] .slab { border-radius: 0.3rem 2.75rem 0.3rem 0.3rem; }
+
+/* patterns, drawn as an overlay in --pc (the pattern ink) */
+[data-theme="zine"] .tile[data-pattern="dots"] {
+  --pat: radial-gradient(circle, rgb(var(--pc) / 0.3) 1.6px, transparent 2px);
+  --pat-size: 12px 12px;
+}
+[data-theme="zine"] .tile[data-pattern="stripes"] {
+  --pat: repeating-linear-gradient(45deg, rgb(var(--pc) / 0.17) 0 3px, transparent 3px 11px);
+  --pat-size: auto;
+}
+[data-theme="zine"] .tile[data-pattern="checks"] {
+  --pat: conic-gradient(rgb(var(--pc) / 0.14) 25%, transparent 0 50%, rgb(var(--pc) / 0.14) 0 75%, transparent 0);
+  --pat-size: 28px 28px;
+}
+[data-theme="zine"] .tile[data-pattern="grid"] {
+  --pat: linear-gradient(rgb(var(--pc) / 0.22) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--pc) / 0.22) 1px, transparent 1px);
+  --pat-size: 20px 20px;
+}
+
+/* the tile itself */
+[data-theme="zine"] .slab {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 0;
+  /* leave room above the text for the glyph, so they never overlap */
+  padding: calc(var(--glyph, 7rem) * 0.8 + 0.5rem) 1rem 1rem;
+  overflow: hidden;
+  border: 3px solid #14100e;
+  box-shadow: 5px 5px 0 0 #14100e;
+}
+[data-theme="zine"] .slab:hover,
+[data-theme="zine"] .slab:focus-visible,
+[data-theme="zine"] .slab:active {
+  box-shadow: 9px 9px 0 0 #14100e;
+}
+[data-theme="zine"] .slab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--pat, none);
+  background-size: var(--pat-size, auto);
+}
+[data-theme="zine"] .slab-body {
+  position: relative;
+  z-index: 1;
+}
+[data-theme="zine"] .glyph {
+  display: block;
+  position: absolute;
+  top: 0.4rem;
+  right: 0.7rem;
+  font-family: var(--font-display);
+  font-size: var(--glyph, 7rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--tile-fg);
+  paint-order: stroke fill;
+  pointer-events: none;
+}
+[data-theme="zine"] .arrow {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 1;
+}
+[data-theme="zine"] .chip-wip {
+  background: #14100e;
+  color: #ff5a1f;
+}
+[data-theme="zine"] .tile[data-color="ink"] .chip-wip {
+  background: #ff5a1f;
+  color: #14100e;
+}

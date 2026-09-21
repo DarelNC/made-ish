@@ -24,7 +24,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: `${profile.name} / links`,
+  title: profile.headline.join(" "),
   description: profile.bio,
 };
 

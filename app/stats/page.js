@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { links, profile } from "@/content/site";
+import { links } from "@/content/site";
 import { loadSummary } from "@/lib/analytics/loadSummary";
 import { STATS_COOKIE, cookieAuthorized } from "@/lib/statsAuth";
 import { login, logout } from "./actions";
@@ -37,7 +37,7 @@ export default async function Stats({ searchParams }) {
       <main className="mx-auto max-w-[760px] px-5 py-8 text-lime">
         <header className="flex items-start justify-between gap-4">
           <div>
-            <p className="label text-lime/60">{profile.name} / private</p>
+            <p className="label text-lime/60">Private</p>
             <h1 className="mt-2 font-display text-5xl uppercase leading-none text-bone">Stats</h1>
           </div>
           {!devOpen && (
@@ -173,7 +173,7 @@ function Gate({ failed }) {
   return (
     <div className="min-h-dvh bg-ink">
       <main className="mx-auto flex min-h-dvh max-w-[420px] flex-col justify-center px-5 text-lime">
-        <p className="label text-lime/60">{profile.name} / private</p>
+        <p className="label text-lime/60">Private</p>
         <h1 className="mt-2 font-display text-5xl uppercase leading-none text-bone">Stats</h1>
         <form action={login} className="mt-8 space-y-3">
           <label className="label block text-lime/70" htmlFor="token">
