@@ -506,6 +506,34 @@
   left: 0.85rem;
   z-index: 1;
 }
+/* Text that sits on a pattern gets a marker highlight, one box per line, so the
+   pattern never runs through the letters. */
+[data-theme="zine"] .tile {
+  --hl-bg: #f5efe6;
+  --hl-fg: #14100e;
+}
+[data-theme="zine"] .tile[data-color="ink"] {
+  --hl-bg: #e6ff4f;
+}
+[data-theme="zine"] .slab-title {
+  margin-bottom: 0.7rem;
+}
+[data-theme="zine"] .slab-blurb,
+[data-theme="zine"] .idx {
+  background: var(--hl-bg);
+  color: var(--hl-fg);
+  opacity: 1;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+[data-theme="zine"] .slab-blurb {
+  display: inline;
+  padding: 0.14em 0.45em;
+  line-height: 1.95;
+}
+[data-theme="zine"] .idx {
+  padding: 0.1em 0.4em;
+}
 [data-theme="zine"] .chip-wip {
   background: #14100e;
   color: #ff5a1f;

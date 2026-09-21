@@ -73,6 +73,7 @@ One custom arrow glyph drawn in SVG. No icon library.
 - **Each link is its own object.** `lib/look.js` gives every link a color (six), a pattern (dots, stripes, checks, grid or none), a shape (four corner treatments), a size, a tilt, and a big outlined glyph from `mark` in `content/site.js`. Position decides them, so neighbours always differ, and any can be overridden per link.
 - **Layout is a wrapping flex collage, not a grid.** Tiles grow to fill each row, so any number of links packs without holes: two per row on desktop for wide tiles, more for small ones, one per row on a phone for anything with a long title. A grid with fixed spans would leave gaps for most link counts.
 - **Long titles get wide tiles.** A word of 11 letters or more always gets a large tile, and 8 or more never gets a small one, so a title cannot overflow.
+- **Text on a pattern gets a marker highlight.** The blurb and the index number sit on a paper-colored (lime on the ink tile) box, one per line, so the pattern never runs through the letters. Checked on all four patterns and on the ink tile at 375px. Text that is large and bold enough (the title, the glyph) is left bare.
 - **Hover** straightens the tile and grows its shadow.
 
 **What it costs:** it is the only theme that shows per-link looks, so the other five still show a uniform list. If the owner likes the idea, the next step is to carry some of it (color, glyph) into the others.

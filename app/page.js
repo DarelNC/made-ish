@@ -87,7 +87,7 @@ export default function Home() {
                     </span>
                     <span className="slab-body">
                       <span className="flex items-center gap-2">
-                        <span className="label opacity-70">{two(i + 1)}</span>
+                        <span className="idx label opacity-70">{two(i + 1)}</span>
                         <span className={`chip chip-${l.status}`}>
                           {l.kind} / {STATUS[l.status]}
                         </span>
