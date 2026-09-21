@@ -4,7 +4,7 @@ Durable project memory. Short on purpose: each concern has its own file, linked 
 
 ## What this is
 
-A one-page link hub (a Linktree-style page) that lists the sites and apps I build, with first-party analytics: page views, visitors, and clicks per link. Deployed on Vercel. Codename `open-tabs`, provisional (see [product.md](product.md)).
+A one-page link hub (a Linktree-style page) that lists the sites and apps I build, with first-party analytics: page views, visitors, and clicks per link. Deployed on Vercel. Named `made-ish` (see [product.md](product.md)).
 
 ## v1 scope
 

@@ -1,4 +1,4 @@
-# open-tabs
+# made-ish
 
 A one-page link hub for the sites and apps I build, with click and visit analytics that run on the same deploy. Mobile first, no cookies, no third-party scripts.
 
@@ -7,8 +7,8 @@ There is no live demo yet.
 ## Run it
 
 ```bash
-git clone https://github.com/DarelNC/open-tabs.git
-cd open-tabs
+git clone https://github.com/DarelNC/made-ish.git
+cd made-ish
 npm install
 npm run dev
 ```

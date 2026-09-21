@@ -9,7 +9,7 @@ A row of six square swatches at the top of the page. Tapping one switches the wh
 ## Flow
 
 1. An inline script in `<head>` runs before first paint and sets `<html data-theme>`. A saved, valid choice wins. Otherwise a dark OS gets `blueprint` and everything else gets `zine`.
-2. `ThemePicker` reads the attribute, renders the swatches, and on a tap writes the new attribute and saves it to `localStorage` under `ot-theme`.
+2. `ThemePicker` reads the attribute, renders the swatches, and on a tap writes the new attribute and saves it to `localStorage` under `madeish-theme`.
 3. CSS in `app/themes.css` does the rest. No component knows which theme is active.
 
 ## Decisions
