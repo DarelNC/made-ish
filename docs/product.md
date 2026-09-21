@@ -16,6 +16,16 @@ The page shows no personal name or handle, only the headline and bio in `content
 - **Trademark:** not searched at the USPTO or EUIPO. A web search found only an abandoned "Innovative Digital Zine" filing.
 - **Fine as a theme name.** Inside the app, "Zine" is only the name of one look, so none of this matters there. It matters for the repo, the package and the domain.
 
+**Second round (checked 2026-09-21): `made-ish`, `halfdone`, `sundry`.**
+
+| Name | npm | GitHub user | GitHub repos | `.vercel.app` | Domains (DNS only) | Other |
+| --- | --- | --- | --- | --- | --- | --- |
+| `made-ish` | free (`made-ish`, `madeish`) | free | none named this | free | every TLD tried has no DNS, including `made-ish.com`, `.app`, `.dev`, `.io`, `.link` | `madeish.com` is registered. A merch brand called "Madeish" (madeinyourbrand.com) turned up in one web search, unrelated field |
+| `halfdone` | free | taken (empty account) | 26, none notable | `halfdone` free, `half-done` taken | `.com` and `.dev` registered, others no DNS | **Halfdone Development** (halfdone.com) is a software company, tagline "because programs are never done". Same field and nearly the same joke. Avoid |
+| `sundry` | taken (a reverse proxy) | taken (empty account) | 494, top one has 60 stars | taken (a branding studio) | `.com`, `.app`, `.dev`, `.io`, `.me`, `.page`, `.studio` registered, `.link`, `.so`, `.bio` no DNS | crowded |
+
+**Result:** `made-ish` is the only clean one. The hyphen is what makes it work: it reads as "made" plus "ish" for readers who do not know the suffix, and it is free on every registry checked. The apostrophe idea does not survive URLs, package names or repo names, so it is out. Trademark was not searched at the USPTO or EUIPO. DNS results are not authoritative, so verify domains at a registrar before buying.
+
 ## What it is for
 
 A place to list the webs, apps and similar things I build, so one link can point to all of them, with numbers on what people actually open. It is a personal page. It is not a multi-user product, not a Linktree competitor, and has no plan to become one.
