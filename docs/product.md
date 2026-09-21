@@ -6,6 +6,16 @@
 
 The page shows no personal name or handle, only the headline and bio in `content/site.js`. The project name only shows up in the repo and package.
 
+### Naming checks so far
+
+**`zine` (checked 2026-09-21): crowded, not a good project name.** The word is generic and already used by developer tools in the same space.
+
+- **Closest collisions:** `kristoff-it/zine`, a Zig static site generator for personal sites and blogs (about 1.6k stars, zine-ssg.io), and `zineland/zine`, a Rust magazine builder (about 900 stars). A repo called `zine` would sit beside them in every GitHub search.
+- **Taken:** the npm package `zine` (an old pub/sub library) and `zine-cli`, the GitHub user `zine`, `zine.vercel.app` and `zine-app.vercel.app`, and an App Store writing app called Zine.
+- **Domains (DNS check only, not authoritative):** `zine.com`, `.app` (for sale), `.dev`, `.io`, `.me`, `.page`, `.to`, `.fyi`, `getzine.com` (for sale), `usezine.com` and `zine.studio` are registered. No DNS records were found for `zine.link`, `zine.so`, `zine.bio`, `zinehq.com` and `zines.link`, which may be free or parked. Verify at a registrar.
+- **Trademark:** not searched at the USPTO or EUIPO. A web search found only an abandoned "Innovative Digital Zine" filing.
+- **Fine as a theme name.** Inside the app, "Zine" is only the name of one look, so none of this matters there. It matters for the repo, the package and the domain.
+
 ## What it is for
 
 A place to list the webs, apps and similar things I build, so one link can point to all of them, with numbers on what people actually open. It is a personal page. It is not a multi-user product, not a Linktree competitor, and has no plan to become one.
