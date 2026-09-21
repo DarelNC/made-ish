@@ -2,6 +2,8 @@
 // An `id` is stored in analytics events, so never reuse one for a different link.
 
 export const profile = {
+  // The name of the site, shown top left on every theme.
+  brand: "made-ish",
   // Two short words or phrases. The first is solid, the second is the loud one.
   headline: ["Things", "I made"],
   bio: "Small web things and apps I made instead of doing something sensible. Pick one.",

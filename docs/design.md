@@ -51,7 +51,8 @@ Shared by the five poster themes: the inks (`#14100e`, `#f5efe6`, `#ff5a1f`, `#e
 
 ### Layout (mobile first)
 
-- **Under 1024px:** one column. Picker, name and bio, then the links.
+- **The name** "made-ish" sits top left on every theme, in the display face, opposite the picker. It replaces a footer so it is visible without scrolling.
+- **Under 1024px:** one column. Name and picker, headline and bio, then the links.
 - **1024px and up:** two columns, 5 to 7. The headline, bio and count stay pinned on the left while the links scroll on the right, inside a 1120px frame. `zine` is the exception and uses one column, see below.
 - Links are at least 72px tall on a phone and 88px on desktop. Retired links stay listed with a strikethrough, because a link page that only shows successes is a brochure.
 

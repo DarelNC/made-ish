@@ -4,9 +4,7 @@
 
 Chosen 2026-09-21 after two collision rounds (see below). It was `open-tabs` while it was a codename. The hyphen is part of the name: it makes "made" and "ish" readable as two words for people who do not know the suffix, and it is free on every registry checked.
 
-**Still to do before this goes public:** confirm the domains at a registrar (`made-ish.com` and `made-ish.link` first) and run a real USPTO and EUIPO trademark search. `madeish.com` belongs to someone else.
-
-The page shows no personal name or handle, only the headline and bio in `content/site.js`. The project name only shows up in the repo and package.
+The page shows no personal name or handle. It shows the project name, made-ish, top left (`profile.brand` in `content/site.js`), then the headline and bio.
 
 ### Naming checks so far
 

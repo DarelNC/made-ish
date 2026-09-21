@@ -29,9 +29,7 @@ export default function ThemePicker() {
 
   return (
     <div className="picker">
-      <p className="label">
-        Redecorate<span className="hidden sm:inline"> / {mood}</span>
-      </p>
+      <p className="label hidden sm:block">Redecorate / {mood}</p>
       <div role="radiogroup" aria-label="Theme" className="picker-swatches">
         {THEMES.map((t) => (
           <button

@@ -23,5 +23,13 @@
   },
   "description": "A one-page link hub for the sites and apps I build, with first-party click and visit analytics.",
   "license": "MIT",
-  "author": "DarelNC <darelchcrespo@hotmail.com>"
+  "author": "DarelNC <darelchcrespo@hotmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarelNC/made-ish.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DarelNC/made-ish/issues"
+  },
+  "homepage": "https://github.com/DarelNC/made-ish"
 }

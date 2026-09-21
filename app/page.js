@@ -37,6 +37,7 @@ export default function Home() {
 
       <div className="shell mx-auto grid max-w-[1120px] gap-x-20 gap-y-12 px-5 pb-16 pt-6 lg:grid-cols-[5fr_7fr] lg:px-10 lg:pt-10">
         <div className="topbar lg:col-span-2">
+          <p className="brand">{profile.brand}</p>
           <ThemePicker />
         </div>
 
