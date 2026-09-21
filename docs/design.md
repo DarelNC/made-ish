@@ -57,7 +57,7 @@ Shared by the five poster themes: the inks (`#14100e`, `#f5efe6`, `#ff5a1f`, `#e
 
 ### Motion
 
-Hard and quick: 120ms, stepped. Nothing fades in on load. The ticker scrolls slowly. `prefers-reduced-motion` stops the ticker and the hover shift. Hover styles only apply on devices that can hover, so a tap on a phone does not leave a link stuck in its snap color.
+Hard and quick: 120ms, stepped, in the five poster themes. `zine` is the exception: its tiles are tilted, and a 2-step snap on a rotated tile looks like a dropped frame, so it uses a 260ms ease with a small overshoot instead. Nothing fades in on load. The ticker scrolls slowly. `prefers-reduced-motion` stops the ticker and the hover shift. Hover styles only apply on devices that can hover, so a tap on a phone does not leave a link stuck in its snap color.
 
 ### Iconography
 
