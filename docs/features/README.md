@@ -5,7 +5,7 @@ One file per feature. A new feature gets a new doc here and an explicit decision
 - [link-list.md](link-list.md): the public page and its data file. v1.
 - [click-tracking.md](click-tracking.md): `/go/<id>` and the view beacon. v1.
 - [analytics-dashboard.md](analytics-dashboard.md): the private `/stats` page. v1.
-- [theme-picker.md](theme-picker.md): five themes and a picker. Added after the first review.
+- [theme-picker.md](theme-picker.md): six themes and a picker. Added after the first review.
 
 ## Deliberately cut from v1
 

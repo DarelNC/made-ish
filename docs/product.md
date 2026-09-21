@@ -4,7 +4,7 @@
 
 `open-tabs` is a working codename, picked because a list of links reads as a set of open tabs. Before this goes public: check collisions, and check the domain and handle. Until then it is not settled, however long it has been in the file names.
 
-The page shows the owner's name and handle from `content/site.js`, not the project name. The project name only shows up in the repo and package.
+The page shows no personal name or handle, only the headline and bio in `content/site.js`. The project name only shows up in the repo and package.
 
 ## What it is for
 

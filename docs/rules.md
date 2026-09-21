@@ -12,7 +12,7 @@ A one-page link hub (a Linktree-style page) that lists the sites and apps I buil
 - Every outbound click goes through `/go/<id>`, which records the click and redirects.
 - Page views recorded by a small beacon.
 - A private `/stats` page that reads the recorded events.
-- Five switchable themes.
+- Six switchable themes.
 
 What was left out is in [features/README.md](features/README.md).
 
@@ -24,7 +24,7 @@ What was left out is in [features/README.md](features/README.md).
 - **Links live in `content/site.js`**, not in a database. Adding a link is a commit.
 - **Plain JavaScript**, not TypeScript. The tradeoff is covered by keeping the event and aggregation code small, pure and tested. See [stack.md](stack.md).
 - **Mobile first.** Design at 375px, then widen.
-- **UI work follows [design.md](design.md), and any new UI is checked in all five themes.** Text follows [writing.md](writing.md).
+- **UI work follows [design.md](design.md), and any new UI is checked in all six themes.** Text follows [writing.md](writing.md).
 - **Default branch is `master`.**
 - **No Claude attribution in commits or PRs**, and commit messages are one line. Enforced by the workspace `CLAUDE.md`.
 
