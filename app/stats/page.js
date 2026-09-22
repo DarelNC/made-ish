@@ -66,6 +66,12 @@ export default async function Stats({ searchParams }) {
             docs/architecture.md, &ldquo;Open decision: production storage&rdquo;.
           </p>
         )}
+        {storeName === "remote" && (
+          <p className="mt-6 border-2 border-orange p-4 text-sm text-orange">
+            Events go to the collector now, so every number below is zero. See them on the private
+            dashboard instead.
+          </p>
+        )}
 
         <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Tile label="Views" value={s.views} />

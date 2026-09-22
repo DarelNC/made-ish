@@ -20,7 +20,7 @@ Fetched at build time and self-hosted from our own domain, so a visitor's browse
 
 ## Storage: an adapter, not a database
 
-There is no database dependency yet. See [architecture.md](architecture.md#open-decision-production-storage).
+There is no database dependency. Production uses `ANALYTICS_STORE=remote`, which sends events to a collector on the owner's VPS rather than storing them here. See [architecture.md](architecture.md#production-storage-the-remote-store).
 
 ## Charts: none
 

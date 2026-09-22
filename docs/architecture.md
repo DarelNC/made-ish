@@ -51,17 +51,20 @@ Nothing else is stored. No IP, no full user agent, no full URL, no query string 
 - **Spoofable.** Anyone can POST fake views to `/api/hit` or fetch `/go/<id>` in a loop. For a personal link page that is acceptable. If it ever matters, the fix is rate limiting at the store, not more client code.
 - **Unique visitors are approximate.** The hash rotates daily and mixes IP and user agent, so one person on two networks counts twice and two people on one office network with the same browser count once.
 
-## Open decision: production storage
+## Production storage: the `remote` store
 
-Vercel functions have no durable disk, so the `file` adapter only works in development. Until this is decided, production runs the `none` adapter: links, redirects and the public page all work, and nothing is recorded. `/stats` says so.
+Chosen 2026-09-22: events are sent to a collector on the owner's own VPS (the `single-point-of-failure` repo, `modules/analytics`), which several projects share, not only this one. That is the "own collector" option below, decided.
 
-Options, with the constraint "no third-party services, no paid plans":
+- **Write side, here:** `ANALYTICS_STORE=remote` posts each event to `${COLLECTOR_URL}/collect` with `COLLECTOR_KEY` as the project's API key (`lib/analytics/store/remote.js`). It never throws: a slow or unreachable collector logs and moves on, the same as every other store.
+- **Read side: not here.** The collector already summarizes events (`GET /analytics/summary`), so a separate, private dashboard reads that endpoint directly instead of this app pulling raw events back over the network and running `summarize()` a second time. That dashboard is its own repo, not this one, because analytics data from several projects does not belong inside any single one of them.
+- **`/stats` in this repo stays**, unchanged, reading the local store. In production, with the store set to `remote`, it always shows zero and says where the real numbers are. It still works in development against the `file` store.
+- **No volume, no durability on the collector side yet.** The collector writes to a JSON file inside its container with no persistent volume, so a redeploy over there currently loses events. That is a deliberate, separate decision on that repo, not blocking this one.
+
+Original options considered, kept for the record:
 
 | Option | Fits the constraint | Cost | Notes |
 | --- | --- | --- | --- |
 | Free Vercel Marketplace store (Upstash Redis, Neon Postgres) | Partly. It is a free tier, but it is a third-party account and its limits and terms are the vendor's. | 0 | Least work. One env var and one adapter file. |
-| Own collector: a small process with SQLite on a box I already own (Raspberry Pi, old laptop, VPS) | Yes | 0 if the box exists | Second deployable that has to stay up. The adapter would POST to it, or `/stats` would read from it. |
-| Vercel Web Analytics | Vercel is already the host | 0 on Hobby, but check the current plan limits | Built for page views. Per-link click events and data export are the parts to verify before relying on it. |
-| Run `next start` on my own machine | Yes | 0 | Gives up Vercel, which is a stated requirement. |
-
-No choice made yet. The adapter interface is the same for all of them.
+| **Own collector (chosen)** | Yes | 0, the VPS already exists | A second deployable that has to stay up. Built as a shared collector, not specific to this project. |
+| Vercel Web Analytics | Vercel is already the host | 0 on Hobby, but check the current plan limits | Built for page views. Per-link click events and data export are the parts to verify before relying on it. Not chosen: no per-link clicks on the free tier. |
+| Run `next start` on my own machine | Yes | 0 | Gives up Vercel, which is a stated requirement. Not chosen. |
